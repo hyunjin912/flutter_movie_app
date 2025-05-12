@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movie_app/presentation/pages/home/widgets/movie_item.dart';
 
 class MoveList extends StatelessWidget {
-  String label;
-  bool isNumber;
+  final String label;
+  final bool isNumber;
 
-  MoveList({super.key, required this.label, required this.isNumber});
+  const MoveList({super.key, required this.label, required this.isNumber});
 
   @override
   Widget build(BuildContext context) {

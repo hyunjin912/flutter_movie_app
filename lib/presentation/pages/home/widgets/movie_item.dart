@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movie_app/presentation/pages/detail/detail.dart';
 
 class MovieItem extends StatelessWidget {
-  bool isNumber;
-  String number;
+  final bool isNumber;
+  final String number;
 
-  MovieItem({required this.isNumber, required this.number, super.key});
+  const MovieItem({required this.isNumber, required this.number, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,38 +47,6 @@ class MovieItem extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-    );
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Container(
-        alignment: Alignment.centerRight,
-        child: AspectRatio(
-          aspectRatio: 3 / 4,
-          child: Stack(
-            alignment: AlignmentDirectional.centerEnd,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  'https://picsum.photos/200/300',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-
-    return AspectRatio(
-      aspectRatio: 3 / 4,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Image.network(
-          'https://picsum.photos/200/300',
-          fit: BoxFit.cover,
         ),
       ),
     );
