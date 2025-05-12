@@ -30,11 +30,13 @@ void main() {
     when(() {
       // ✅ 포지셔널 파라미터는 any()
       // ✅ 네임드 파라미터는 any(named: '파라미터') 로 사용해야 한다.
-      return mockDio!.get(
-        any(),
-        options: any(named: 'options'),
-        queryParameters: any(named: 'queryParameters'),
-      );
+      // ex)
+      //  mockDio!.get(
+      //   any(),
+      //   options: any(named: 'options'),
+      //   queryParameters: any(named: 'queryParameters'),
+      // );
+      return mockDio!.get(any());
     }).thenAnswer((invocation) async {
       return response;
     });
