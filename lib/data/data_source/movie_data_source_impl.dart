@@ -8,7 +8,7 @@ class MovieDataSourceImpl implements MovieDataSource {
   MovieDataSourceImpl(this._dio);
 
   @override
-  Future<List<MovieResponseDto>> fetchMovies() async {
+  Future<List<MovieResponseDto>> fetchPopularMovies() async {
     try {
       final response = await _dio.get(
         'https://api.themoviedb.org/3/movie/popular',

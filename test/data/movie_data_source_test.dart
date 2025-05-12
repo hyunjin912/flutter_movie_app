@@ -39,10 +39,10 @@ void main() {
       return response;
     });
 
-    final results = await dataSource!.fetchMovies();
+    final results = await dataSource!.fetchPopularMovies();
 
     expect(results.length, 20);
-    expect(results[0].originalTitle, 'Warfare');
-    expect(results[0].title, '워페어');
+    expect(results.first.originalTitle, 'Warfare');
+    expect(results.first.title, '워페어');
   });
 }
