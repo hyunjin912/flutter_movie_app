@@ -5,11 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MovieItem extends ConsumerStatefulWidget {
+  final String label;
   final bool isNumber;
   final String number;
   final Movie? movie;
 
   const MovieItem({
+    required this.label,
     required this.isNumber,
     required this.number,
     required this.movie,
@@ -27,12 +29,16 @@ class _MovieItemState extends ConsumerState<MovieItem>
 
   @override
   Widget build(BuildContext context) {
+    print('MovieItem movie.id : ${widget.movie?.id}');
+    final heroTag = '${widget.label}_${widget.movie?.id ?? ''}';
     super.build(context);
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Detail()),
+          MaterialPageRoute(
+            builder: (context) => Detail(movie: widget.movie, heroTag: heroTag),
+          ),
         );
       },
       child: Padding(
@@ -42,19 +48,22 @@ class _MovieItemState extends ConsumerState<MovieItem>
           children: [
             AspectRatio(
               aspectRatio: 2 / 3,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child:
-                    widget.movie == null
-                        ? Shimmer.fromColors(
-                          baseColor: Colors.grey,
-                          highlightColor: Colors.grey[600]!,
-                          child: Container(color: Colors.white),
-                        )
-                        : Image.network(
-                          'https://image.tmdb.org/t/p/original${widget.movie?.posterPath}',
-                          fit: BoxFit.cover,
-                        ),
+              child: Hero(
+                tag: heroTag,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child:
+                      widget.movie == null
+                          ? Shimmer.fromColors(
+                            baseColor: Colors.grey,
+                            highlightColor: Colors.grey[600]!,
+                            child: Container(color: Colors.white),
+                          )
+                          : Image.network(
+                            'https://image.tmdb.org/t/p/original${widget.movie?.posterPath}',
+                            fit: BoxFit.cover,
+                          ),
+                ),
               ),
             ),
             Positioned(

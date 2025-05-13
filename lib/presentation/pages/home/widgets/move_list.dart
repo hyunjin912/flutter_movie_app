@@ -32,6 +32,7 @@ class MoveList extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return MovieItem(
+                label: label,
                 movie: movies?[index],
                 isNumber: isNumber,
                 number: '${index + 1}',

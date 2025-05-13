@@ -12,6 +12,8 @@ class MostPopularMovie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('MostPopularMovie : ${movie?.id}');
+    final heroTag = '가장 인기있는_${movie?.id ?? ''}';
     return Expanded(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -26,18 +28,20 @@ class MostPopularMovie extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Detail()),
+                    MaterialPageRoute(
+                      builder:
+                          (context) => Detail(movie: movie, heroTag: heroTag),
+                    ),
                   );
                 },
                 child: SizedBox(
                   width: double.infinity,
                   child: Hero(
-                    tag: 'movie',
+                    tag: heroTag,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child:
                           movie == null
-                              // true
                               ? Shimmer.fromColors(
                                 baseColor: Colors.grey,
                                 highlightColor: Colors.grey[600]!,
