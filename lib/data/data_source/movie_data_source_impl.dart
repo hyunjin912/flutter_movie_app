@@ -5,6 +5,8 @@ import 'package:flutter_movie_app/data/dto/movie_response_dto.dart';
 class Tmdb {
   static final popular = '/popular';
   static final nowPlaying = '/now_playing';
+  static final topRated = '/top_rated';
+  static final upcoming = '/upcoming';
 }
 
 class MovieDataSourceImpl implements MovieDataSource {
@@ -46,6 +48,44 @@ class MovieDataSourceImpl implements MovieDataSource {
   Future<List<MovieResponseDto>> fetchNowPlayingMovies() async {
     try {
       final response = await _dio.get(Tmdb.nowPlaying);
+
+      if (response.statusCode == 200) {
+        final results = List.from(response.data['results']);
+        final movieList =
+            results.map((e) => MovieResponseDto.fromJson(e)).toList();
+        return movieList;
+      }
+      return [];
+    } catch (e, s) {
+      print(e);
+      print(s);
+      return [];
+    }
+  }
+
+  @override
+  Future<List<MovieResponseDto>> fetchTopRatedMovies() async {
+    try {
+      final response = await _dio.get(Tmdb.topRated);
+
+      if (response.statusCode == 200) {
+        final results = List.from(response.data['results']);
+        final movieList =
+            results.map((e) => MovieResponseDto.fromJson(e)).toList();
+        return movieList;
+      }
+      return [];
+    } catch (e, s) {
+      print(e);
+      print(s);
+      return [];
+    }
+  }
+
+  @override
+  Future<List<MovieResponseDto>> fetchUpcomingMovies() async {
+    try {
+      final response = await _dio.get(Tmdb.upcoming);
 
       if (response.statusCode == 200) {
         final results = List.from(response.data['results']);

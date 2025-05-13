@@ -43,4 +43,36 @@ class MovieRepositoryImpl implements MovieRepository {
 
     return movies;
   }
+
+  @override
+  Future<List<Movie>> fetchTopRatedMovies() async {
+    // ✅ 1. 서버와 통신하여 데이터를 가져온다
+    // ✅ 서버와 통신하는 부분은 data layer의 data_source이다.
+    final movieResponseDtoList = await _movieDataSource.fetchTopRatedMovies();
+
+    // ✅ 2. 가져온 데이터를 entity의 모델 클래스를 이용해
+    // ✅ 객체를 생성하여 반환
+    List<Movie> movies =
+        movieResponseDtoList
+            .map((e) => Movie(id: e.id, posterPath: e.posterPath))
+            .toList();
+
+    return movies;
+  }
+
+  @override
+  Future<List<Movie>> fetchUpcomingMovies() async {
+    // ✅ 1. 서버와 통신하여 데이터를 가져온다
+    // ✅ 서버와 통신하는 부분은 data layer의 data_source이다.
+    final movieResponseDtoList = await _movieDataSource.fetchUpcomingMovies();
+
+    // ✅ 2. 가져온 데이터를 entity의 모델 클래스를 이용해
+    // ✅ 객체를 생성하여 반환
+    List<Movie> movies =
+        movieResponseDtoList
+            .map((e) => Movie(id: e.id, posterPath: e.posterPath))
+            .toList();
+
+    return movies;
+  }
 }

@@ -19,9 +19,7 @@ class _HomeState extends ConsumerState<Home> {
     final deviceSize = mediaQuery.size;
     final devicePadding = mediaQuery.padding;
     final homeState = ref.watch(homeViewModelProvider);
-    print('✅');
-    print(homeState.popular);
-    print('✅');
+
     return MyScaffold(
       children: [
         Column(
@@ -42,8 +40,20 @@ class _HomeState extends ConsumerState<Home> {
                 ],
               ),
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 5), // 위 컨테이너의 패딩 바텀 5 있기 때문에
             MoveList(label: '인기순', isNumber: true, movies: homeState.popular),
+            SizedBox(height: 10),
+            MoveList(
+              label: '평점 높은 순',
+              isNumber: false,
+              movies: homeState.topRated,
+            ),
+            SizedBox(height: 10),
+            MoveList(
+              label: '개봉예정',
+              isNumber: false,
+              movies: homeState.upcoming,
+            ),
           ],
         ),
       ],
