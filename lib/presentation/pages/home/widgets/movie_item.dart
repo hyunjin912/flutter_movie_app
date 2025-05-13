@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_app/domain/entity/movie.dart';
 import 'package:flutter_movie_app/presentation/pages/detail/detail.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shimmer/shimmer.dart';
 
-class MovieItem extends StatelessWidget {
+class MovieItem extends ConsumerStatefulWidget {
   final bool isNumber;
   final String number;
+  final Movie? movie;
 
-  const MovieItem({required this.isNumber, required this.number, super.key});
+  const MovieItem({
+    required this.isNumber,
+    required this.number,
+    required this.movie,
+    super.key,
+  });
+
+  @override
+  ConsumerState<MovieItem> createState() => _MovieItemState();
+}
+
+class _MovieItemState extends ConsumerState<MovieItem>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -17,7 +36,7 @@ class MovieItem extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: EdgeInsets.only(left: isNumber ? 35 : 0),
+        padding: EdgeInsets.only(left: widget.isNumber ? 35 : 0),
         child: Stack(
           clipBehavior: Clip.none,
           children: [
@@ -25,19 +44,26 @@ class MovieItem extends StatelessWidget {
               aspectRatio: 2 / 3,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  'https://picsum.photos/200/300',
-                  fit: BoxFit.cover,
-                ),
+                child:
+                    widget.movie == null
+                        ? Shimmer.fromColors(
+                          baseColor: Colors.grey,
+                          highlightColor: Colors.grey[600]!,
+                          child: Container(color: Colors.white),
+                        )
+                        : Image.network(
+                          'https://image.tmdb.org/t/p/original${widget.movie?.posterPath}',
+                          fit: BoxFit.cover,
+                        ),
               ),
             ),
             Positioned(
               bottom: 0,
               left: -30,
               child: Visibility(
-                visible: isNumber,
+                visible: widget.isNumber,
                 child: Text(
-                  number,
+                  widget.number,
                   style: TextStyle(
                     letterSpacing: -10,
                     height: 1,

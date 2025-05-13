@@ -3,7 +3,8 @@ import 'package:flutter_movie_app/data/data_source/movie_data_source.dart';
 import 'package:flutter_movie_app/data/dto/movie_response_dto.dart';
 
 class Tmdb {
-  static final popular = '/movie/popular';
+  static final popular = '/popular';
+  static final nowPlaying = '/now_playing';
 }
 
 class MovieDataSourceImpl implements MovieDataSource {
@@ -12,7 +13,7 @@ class MovieDataSourceImpl implements MovieDataSource {
   MovieDataSourceImpl(Dio dio) {
     _dio = dio;
     _dio.options = BaseOptions(
-      baseUrl: 'https://api.themoviedb.org/3',
+      baseUrl: 'https://api.themoviedb.org/3/movie',
       validateStatus: (status) => true,
       headers: {
         'Authorization':
@@ -29,7 +30,25 @@ class MovieDataSourceImpl implements MovieDataSource {
 
       if (response.statusCode == 200) {
         final results = List.from(response.data['results']);
-        print(results.last);
+        final movieList =
+            results.map((e) => MovieResponseDto.fromJson(e)).toList();
+        return movieList;
+      }
+      return [];
+    } catch (e, s) {
+      print(e);
+      print(s);
+      return [];
+    }
+  }
+
+  @override
+  Future<List<MovieResponseDto>> fetchNowPlayingMovies() async {
+    try {
+      final response = await _dio.get(Tmdb.nowPlaying);
+
+      if (response.statusCode == 200) {
+        final results = List.from(response.data['results']);
         final movieList =
             results.map((e) => MovieResponseDto.fromJson(e)).toList();
         return movieList;
