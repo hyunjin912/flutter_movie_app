@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class MyScaffold extends StatelessWidget {
+class GlobalScaffold extends StatelessWidget {
   final List<Widget> children;
 
-  const MyScaffold({Key? key, required this.children}) : super(key: key);
+  const GlobalScaffold({super.key, required this.children});
 
   @override
   Widget build(BuildContext context) {
     final devicePadding = MediaQuery.of(context).padding;
+
     return Scaffold(
       body: ListView(
         padding: EdgeInsets.only(

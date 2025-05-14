@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movie_app/core/font.dart';
+import 'package:flutter_movie_app/presentation/pages/detail/widgets/box_office_info_item.dart';
 
 class BoxOfficeInfo extends StatelessWidget {
   final List<List<dynamic>> boxOffceInfo;
@@ -20,25 +20,10 @@ class BoxOfficeInfo extends StatelessWidget {
           child: Row(
             children: [
               ...List.generate(boxOffceInfo.length, (index) {
-                return Container(
-                  margin:
-                      index == boxOffceInfo.length - 1
-                          ? null
-                          : const EdgeInsets.only(right: 15),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 15,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.grey, width: 2),
-                  ),
-                  child: Column(
-                    children: [
-                      Text('${boxOffceInfo[index].last}', style: Font.style),
-                      Text(boxOffceInfo[index].first, style: Font.style),
-                    ],
-                  ),
+                return BoxOfficeInfoItem(
+                  boxOffceInfoLength: boxOffceInfo.length,
+                  index: index,
+                  boxOffceInfo: boxOffceInfo,
                 );
               }),
             ],

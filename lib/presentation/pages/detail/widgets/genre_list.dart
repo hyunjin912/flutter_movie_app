@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_app/presentation/pages/detail/widgets/genre_item.dart';
 
 class GenreList extends StatelessWidget {
   final List<String> genres;
@@ -18,8 +19,8 @@ class GenreList extends StatelessWidget {
         child: Row(
           children: [
             ...List.generate(genres.length, (index) {
-              return genreItem(
-                categoryLength: genres.length,
+              return GenreItem(
+                genreLength: genres.length,
                 index: index,
                 genre: genres[index],
               );
@@ -27,26 +28,6 @@ class GenreList extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Widget genreItem({
-    required int categoryLength,
-    required int index,
-    required String genre,
-  }) {
-    return Container(
-      margin:
-          index == categoryLength - 1 ? null : const EdgeInsets.only(right: 6),
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: const Color.fromARGB(255, 72, 72, 72),
-          width: 2,
-        ),
-      ),
-      child: Text(genre, style: TextStyle(color: Colors.blue)),
     );
   }
 }

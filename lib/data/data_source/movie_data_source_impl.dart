@@ -3,6 +3,7 @@ import 'package:flutter_movie_app/data/data_source/movie_data_source.dart';
 import 'package:flutter_movie_app/data/dto/movie_detail_dto.dart';
 import 'package:flutter_movie_app/data/dto/movie_response_dto.dart';
 
+/// API 요청 path parameter
 class Tmdb {
   static final popular = '/popular';
   static final nowPlaying = '/now_playing';
@@ -10,6 +11,7 @@ class Tmdb {
   static final upcoming = '/upcoming';
 }
 
+/// data source 구현 클래스
 class MovieDataSourceImpl implements MovieDataSource {
   late Dio _dio;
 
