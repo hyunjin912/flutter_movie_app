@@ -33,7 +33,6 @@ class HomeViewModel extends Notifier<HomeState> {
   }
 
   Future<void> fetchAll() async {
-    print('fetchAll');
     final popular = await fetchPopularMovies();
     final nowPlaying = await fetchNowPlayingMovies();
     final topRated = await fetchTopRatedMovies();
@@ -51,7 +50,6 @@ class HomeViewModel extends Notifier<HomeState> {
       fetchPopularMoviesUsecaseProvider,
     );
     return await fetchPopularMoviesUsecase.execute();
-    // state = state.copywith(popular: result);
   }
 
   Future<List<Movie>> fetchNowPlayingMovies() async {
@@ -59,7 +57,6 @@ class HomeViewModel extends Notifier<HomeState> {
       fetchNowPlayingMoviesUsecaseProvider,
     );
     return await fetchNowPlayingMoviesUsecase.execute();
-    // state = state.copywith(nowPlaying: result);
   }
 
   Future<List<Movie>> fetchTopRatedMovies() async {
@@ -67,7 +64,6 @@ class HomeViewModel extends Notifier<HomeState> {
       fetchTopRatedMoviesUsecaseProvider,
     );
     return await fetcTopRatedMoviesUsecase.execute();
-    // state = state.copywith(nowPlaying: result);
   }
 
   Future<List<Movie>> fetchUpcomingMovies() async {
@@ -75,7 +71,6 @@ class HomeViewModel extends Notifier<HomeState> {
       fetchUpcomingMoviesUsecaseProvider,
     );
     return await fetchUpcomingMoviesUsecase.execute();
-    // state = state.copywith(nowPlaying: result);
   }
 }
 

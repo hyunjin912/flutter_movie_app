@@ -23,8 +23,6 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Detail movie.id : ${movie?.id}');
-
     List<List<dynamic>> boxOffceInfo = [
       ['평점', movie!.voteAverage],
       ['평점투표수', movie!.voteCount],

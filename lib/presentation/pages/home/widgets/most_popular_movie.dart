@@ -12,8 +12,8 @@ class MostPopularMovie extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('MostPopularMovie : ${movie?.id}');
     final heroTag = '가장 인기있는_${movie?.id ?? ''}';
+
     return Expanded(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),

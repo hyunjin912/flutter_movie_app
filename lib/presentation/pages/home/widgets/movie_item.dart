@@ -30,15 +30,13 @@ class _MovieItemState extends ConsumerState<MovieItem>
 
   @override
   Widget build(BuildContext context) {
-    print('MovieItem movie.id : ${widget.movie?.id}');
     final heroTag = '${widget.label}_${widget.movie?.id ?? ''}';
     super.build(context);
     return GestureDetector(
       onTap: () async {
         final detailVm = ref.read(detailViewModelProvider.notifier);
-        print('widget.movie!.id : ${widget.movie!.id}');
         final detailMovie = await detailVm.fetchMovieDetail(widget.movie!.id);
-        print('detailMovie : ${detailMovie}');
+
         Navigator.push(
           context,
           MaterialPageRoute(
