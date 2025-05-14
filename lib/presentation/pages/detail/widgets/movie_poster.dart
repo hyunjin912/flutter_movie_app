@@ -28,7 +28,7 @@ class MoviePoster extends StatelessWidget {
                   child: Container(color: Colors.white),
                 )
                 : Image.network(
-                  'https://image.tmdb.org/t/p/original$posterPath',
+                  'https://image.tmdb.org/t/p/w500$posterPath',
                   fit: BoxFit.cover,
                 ),
       ),

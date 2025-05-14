@@ -22,7 +22,7 @@ class ProductionCompanyLogoItem extends StatelessWidget {
       child: SizedBox(
         width: 110,
         height: 40,
-        child: Image.network('https://image.tmdb.org/t/p/original${logoPath}'),
+        child: Image.network('https://image.tmdb.org/t/p/w200${logoPath}'),
       ),
     );
   }
