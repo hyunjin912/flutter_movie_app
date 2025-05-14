@@ -86,8 +86,6 @@
 //   "vote_count": 191
 // }
 
-import 'dart:convert';
-
 class MovieDetailDto {
   bool adult;
   String backdropPath;

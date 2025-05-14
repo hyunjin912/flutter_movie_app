@@ -17,7 +17,6 @@
 //   "vote_average": 7.223,
 //   "vote_count": 197
 // },
-import 'dart:convert';
 
 class MovieResponseDto {
   bool adult;
