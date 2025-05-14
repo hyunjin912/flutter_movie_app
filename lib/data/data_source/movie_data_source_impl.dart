@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_movie_app/data/data_source/movie_data_source.dart';
 import 'package:flutter_movie_app/data/dto/movie_detail_dto.dart';
 import 'package:flutter_movie_app/data/dto/movie_response_dto.dart';
@@ -20,10 +21,7 @@ class MovieDataSourceImpl implements MovieDataSource {
     _dio.options = BaseOptions(
       baseUrl: 'https://api.themoviedb.org/3/movie',
       validateStatus: (status) => true,
-      headers: {
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMzMwNjBkMmY2YzZjZjExMDVjYTc4YTBmODM1MGEyMyIsIm5iZiI6MTY5NTQ1NTc3MC41OTksInN1YiI6IjY1MGU5YTFhZjI5ZDY2MDBmZjNiOTMwYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xMSwLr5HcBCw-jNevqFpkfhM3lp95D95DXNNltIQSvE',
-      },
+      headers: {'Authorization': 'Bearer ${dotenv.env['TMDB_API_KEY']}'},
       queryParameters: {'language': 'ko-KR', 'page': 1},
     );
   }
