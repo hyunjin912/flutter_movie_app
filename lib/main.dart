@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_movie_app/presentation/pages/detail/detail.dart';
-import 'package:flutter_movie_app/presentation/pages/home/home.dart';
+import 'package:flutter_movie_app/presentation/pages/home/home_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Home(),
+      home: HomePage(),
     );
   }
 }

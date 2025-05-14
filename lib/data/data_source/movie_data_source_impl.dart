@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_movie_app/data/data_source/movie_data_source.dart';
+import 'package:flutter_movie_app/data/dto/movie_detail_dto.dart';
 import 'package:flutter_movie_app/data/dto/movie_response_dto.dart';
 
 class Tmdb {
@@ -98,6 +99,23 @@ class MovieDataSourceImpl implements MovieDataSource {
       print(e);
       print(s);
       return [];
+    }
+  }
+
+  @override
+  Future<MovieDetailDto?> fetchMovieDetail(int id) async {
+    try {
+      final response = await _dio.get('/$id');
+
+      if (response.statusCode == 200) {
+        final result = response.data;
+        return MovieDetailDto.fromJson(result);
+      }
+      return null;
+    } catch (e, s) {
+      print(e);
+      print(s);
+      return null;
     }
   }
 }

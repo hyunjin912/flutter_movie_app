@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app/domain/entity/movie.dart';
-import 'package:flutter_movie_app/presentation/pages/detail/detail.dart';
-import 'package:flutter_movie_app/presentation/pages/home/home_view_model.dart';
+import 'package:flutter_movie_app/presentation/pages/detail/detail_page.dart';
+import 'package:flutter_movie_app/presentation/pages/detail/detail_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 
-class MostPopularMovie extends StatelessWidget {
+class MostPopularMovie extends ConsumerWidget {
   final Movie? movie;
 
   const MostPopularMovie({required this.movie, super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     print('MostPopularMovie : ${movie?.id}');
     final heroTag = '가장 인기있는_${movie?.id ?? ''}';
     return Expanded(
@@ -25,12 +25,20 @@ class MostPopularMovie extends StatelessWidget {
             SizedBox(height: 10),
             Expanded(
               child: GestureDetector(
-                onTap: () {
+                onTap: () async {
+                  final detailVm = ref.read(detailViewModelProvider.notifier);
+                  final detailMovie = await detailVm.fetchMovieDetail(
+                    movie!.id,
+                  );
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder:
-                          (context) => Detail(movie: movie, heroTag: heroTag),
+                          (context) => DetailPage(
+                            movie: detailMovie,
+                            posterPath: movie!.posterPath,
+                            heroTag: heroTag,
+                          ),
                     ),
                   );
                 },

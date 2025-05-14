@@ -1,6 +1,4 @@
 import 'package:flutter_movie_app/domain/entity/movie.dart';
-import 'package:flutter_movie_app/domain/usecase/fetch_now_playing_movies_usecase.dart';
-import 'package:flutter_movie_app/domain/usecase/fetch_popular_movies_usecase.dart';
 import 'package:flutter_movie_app/presentation/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app/domain/entity/movie.dart';
-import 'package:flutter_movie_app/presentation/pages/detail/detail.dart';
+import 'package:flutter_movie_app/presentation/pages/detail/detail_page.dart';
+import 'package:flutter_movie_app/presentation/pages/detail/detail_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -33,11 +34,20 @@ class _MovieItemState extends ConsumerState<MovieItem>
     final heroTag = '${widget.label}_${widget.movie?.id ?? ''}';
     super.build(context);
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        final detailVm = ref.read(detailViewModelProvider.notifier);
+        print('widget.movie!.id : ${widget.movie!.id}');
+        final detailMovie = await detailVm.fetchMovieDetail(widget.movie!.id);
+        print('detailMovie : ${detailMovie}');
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Detail(movie: widget.movie, heroTag: heroTag),
+            builder:
+                (context) => DetailPage(
+                  movie: detailMovie,
+                  posterPath: widget.movie!.posterPath,
+                  heroTag: heroTag,
+                ),
           ),
         );
       },

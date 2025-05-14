@@ -1,5 +1,6 @@
 import 'package:flutter_movie_app/data/data_source/movie_data_source.dart';
 import 'package:flutter_movie_app/domain/entity/movie.dart';
+import 'package:flutter_movie_app/domain/entity/movie_detail.dart';
 import 'package:flutter_movie_app/domain/repository/movie_repository.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
@@ -74,5 +75,37 @@ class MovieRepositoryImpl implements MovieRepository {
             .toList();
 
     return movies;
+  }
+
+  @override
+  Future<MovieDetail> fetchMovieDetail(int id) async {
+    // ✅ 1. 서버와 통신하여 데이터를 가져온다
+    // ✅ 서버와 통신하는 부분은 data layer의 data_source이다.
+    final movieDetialDto = await _movieDataSource.fetchMovieDetail(id);
+
+    // ✅ 2. 가져온 데이터를 entity의 모델 클래스를 이용해
+    // ✅ 객체를 생성하여 반환
+    MovieDetail movieDetail = MovieDetail(
+      budget: movieDetialDto!.budget,
+      genres: movieDetialDto.genres.map((e) => e.name).toList(),
+      id: movieDetialDto.id,
+      productionCompanyLogos:
+          movieDetialDto.productionCompanies
+              .map((e) => e.logoPath)
+              .where((e) => e != '')
+              .toList(),
+
+      overview: movieDetialDto.overview,
+      popularity: movieDetialDto.popularity,
+      releaseDate: movieDetialDto.releaseDate,
+      revenue: movieDetialDto.revenue,
+      runtime: movieDetialDto.runtime,
+      tagline: movieDetialDto.tagline,
+      title: movieDetialDto.title,
+      voteAverage: movieDetialDto.voteAverage,
+      voteCount: movieDetialDto.voteCount,
+    );
+
+    return movieDetail;
   }
 }

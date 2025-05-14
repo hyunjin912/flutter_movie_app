@@ -5,14 +5,14 @@ import 'package:flutter_movie_app/presentation/pages/home/widgets/most_popular_m
 import 'package:flutter_movie_app/presentation/pages/home/widgets/move_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Home extends ConsumerStatefulWidget {
-  const Home({super.key});
+class HomePage extends ConsumerStatefulWidget {
+  const HomePage({super.key});
 
   @override
-  ConsumerState<Home> createState() => _HomeState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomeState extends ConsumerState<Home> {
+class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
