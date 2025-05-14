@@ -56,7 +56,7 @@ class MostPopularMovie extends ConsumerWidget {
                                 child: Container(color: Colors.white),
                               )
                               : Image.network(
-                                'https://image.tmdb.org/t/p/original${movie?.posterPath}',
+                                'https://image.tmdb.org/t/p/w500${movie?.posterPath}',
                                 fit: BoxFit.cover,
                               ),
                     ),

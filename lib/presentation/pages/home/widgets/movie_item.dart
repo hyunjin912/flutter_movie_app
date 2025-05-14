@@ -68,7 +68,7 @@ class _MovieItemState extends ConsumerState<MovieItem>
                             child: Container(color: Colors.white),
                           )
                           : Image.network(
-                            'https://image.tmdb.org/t/p/original${widget.movie?.posterPath}',
+                            'https://image.tmdb.org/t/p/w500${widget.movie?.posterPath}',
                             fit: BoxFit.cover,
                           ),
                 ),
